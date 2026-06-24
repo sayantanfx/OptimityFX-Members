@@ -1,0 +1,17 @@
+# heavy / non-deploy assets
+node_modules/
+*.pdf
+*.zip
+.DS_Store
+**/.DS_Store
+final/
+# old-brand backups (kept locally, not deployed)
+/1-free-mini-ebook.html
+/2-blueprint-299.html
+/3-kit-2999.html
+/index.html
+/_guide.html
+/_make_pdfs.js
+/package.json
+/package-lock.json
+/kit-resources/
