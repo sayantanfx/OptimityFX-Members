@@ -587,5 +587,47 @@ Hi [Name], I help [businesses like theirs] with [service] using AI — faster an
     recalc();
   })();
 </script>
+<!-- ===== ENHANCEMENTS: live HUD, price highlight, exclusive accordions ===== -->
+<style>
+  #liveHud{position:fixed;top:56px;right:14px;z-index:300;display:flex;align-items:center;gap:9px;background:rgba(16,20,27,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,.3);border-radius:100px;padding:8px 12px;box-shadow:0 8px 30px rgba(0,0,0,.5);font-size:12.5px;font-weight:600;color:var(--txt);max-width:74vw}
+  #liveHud .dot{width:8px;height:8px;border-radius:50%;background:#00D4FF;box-shadow:0 0 10px #00D4FF;flex-shrink:0;animation:hudpulse 1.4s infinite}
+  #liveHud .msg{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s}
+  #liveHud .x{cursor:pointer;color:var(--dim);font-size:13px;margin-left:2px;flex-shrink:0}
+  @keyframes hudpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+  @keyframes priceGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(0,212,255,0))}50%{filter:drop-shadow(0 0 9px rgba(0,212,255,.6))}}
+  .hl-price,.new,.result .rn{animation:priceGlow 2.8s ease-in-out infinite}
+  @media(max-width:560px){#liveHud{top:auto;bottom:86px;right:10px;font-size:11.5px;padding:7px 11px;max-width:80vw}}
+  @media(prefers-reduced-motion:reduce){#liveHud .dot,.hl-price,.new,.result .rn{animation:none!important}}
+</style>
+<div id="liveHud"><span class="dot"></span><span class="msg">💰 Making money with AI</span><span class="x" aria-label="dismiss" onclick="this.parentElement.remove()">✕</span></div>
+<script>
+(function(){
+  var hud=document.getElementById('liveHud');
+  if(hud){
+    var m=hud.querySelector('.msg');
+    var msgs=['💰 Making money with AI','🌴 Passive income on autopilot','♾️ Lifetime updates — free forever','⚡ 3 new modules in testing','🔒 Members-only access','📈 Built for the Indian market'];
+    var i=0;
+    setInterval(function(){ if(!hud.isConnected)return; i=(i+1)%msgs.length; m.style.opacity=0; setTimeout(function(){m.textContent=msgs[i];m.style.opacity=1;},250); },3000);
+  }
+  document.querySelectorAll('div,span,strong,b').forEach(function(el){
+    if(el.children.length===0){
+      var t=el.textContent.trim(); var fs=parseFloat(getComputedStyle(el).fontSize);
+      if(/^₹[\d,]+$/.test(t) && fs>=28){ el.classList.add('hl-price'); }
+    }
+  });
+  document.querySelectorAll('details.acc').forEach(function(d){
+    d.addEventListener('toggle',function(){ if(d.open){ document.querySelectorAll('details.acc').forEach(function(o){ if(o!==d) o.open=false; }); } });
+  });
+  document.querySelectorAll('.cc .h').forEach(function(h){
+    h.addEventListener('click',function(e){
+      if(e.target.closest('.copybtn'))return;
+      var me=h.parentElement;
+      document.querySelectorAll('.cc').forEach(function(cc){
+        if(cc!==me){ var b=cc.querySelector('.body'); if(b){ b.style.maxHeight='0'; b.style.paddingTop='0'; b.style.paddingBottom='0'; } }
+      });
+    },true);
+  });
+})();
+</script>
 </body>
 </html>
