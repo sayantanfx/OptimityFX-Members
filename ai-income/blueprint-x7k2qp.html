@@ -943,20 +943,23 @@
   </section>
 
 
-  <!-- ===== TRUST/PROOF BLOCKS (placeholders) ===== -->
+  <!-- ===== TRUST/PROOF BLOCKS ===== -->
   <style>
     .tb-lbl{font-family:'Courier New',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
     .tb-note{font-size:12px;color:var(--dim);margin:6px 0 0}
     .tb-grid{display:grid;gap:14px;margin-top:16px}
     @media(min-width:620px){.tb-grid{grid-template-columns:1fr 1fr 1fr}}
-    .tb-proof{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-    .tb-shot{height:148px;background:repeating-linear-gradient(135deg,#0c1018,#0c1018 12px,#0f1420 12px,#0f1420 24px);display:grid;place-items:center;border-bottom:1px solid var(--line);text-align:center}
-    .tb-shot .ph{font-family:'Courier New',monospace;font-size:11px;color:var(--dim);line-height:1.6}
-    .tb-shot .ic{font-size:30px;opacity:.5}
-    .tb-proof .cap{padding:12px 14px;font-size:13px;color:var(--mut)}
-    .tb-proof .cap b{color:var(--txt)}
+    .tb-pillar{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+    .tb-pillar .ic{font-size:26px}
+    .tb-pillar h3{font-size:15px;margin:10px 0 5px}
+    .tb-pillar p{font-size:13px;color:var(--mut);line-height:1.6}
+    .tb-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+    @media(min-width:620px){.tb-stats{grid-template-columns:repeat(5,1fr)}}
+    .tb-stat{background:var(--card2);border-radius:12px;padding:14px 10px;text-align:center}
+    .tb-stat .n{font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+    .tb-stat .l{font-size:11px;color:var(--mut);margin-top:4px}
     .tb-founder{display:flex;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px}
-    .tb-avatar{width:72px;height:72px;border-radius:50%;flex-shrink:0;background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;font-family:'Courier New',monospace;font-size:10px;color:var(--dim);text-align:center}
+    .tb-founder img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:1px solid var(--line);flex-shrink:0}
     .tb-founder .nm{font-weight:800;font-size:16px}
     .tb-founder .ro{font-family:'Courier New',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin:2px 0 8px}
     .tb-founder p{font-size:13.5px;color:var(--mut)}
@@ -965,8 +968,8 @@
     .tb-guarantee .gt{font-weight:800;font-size:15px}
     .tb-guarantee .gd{font-size:13px;color:var(--mut)}
     .tb-tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
-    .tb-tool{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;color:var(--mut)}
-    .tb-tool .d{width:8px;height:8px;border-radius:50%;background:var(--acc)}
+    .tb-tool{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;color:var(--mut)}
+    .tb-tool .lg{width:18px;height:18px;flex-shrink:0;background:#C7D0DE;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
     .tb-ktile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;position:relative;overflow:hidden}
     .tb-ktile .kt{font-weight:700;font-size:14px;margin-bottom:8px}
     .tb-ktile .blur{filter:blur(4px);opacity:.55;font-size:12px;color:var(--mut);line-height:1.7;user-select:none}
@@ -975,32 +978,39 @@
   </style>
 
   <section class="reveal" style="margin:34px 0">
-    <div class="tb-lbl">Real results</div>
-    <h2>Proof, <span class="g" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">not promises</span></h2>
-    <div class="tb-note">Replace each tile with a real (blurred) screenshot.</div>
+    <div class="tb-lbl">Why you can trust this</div>
+    <h2>Honest by <span class="g" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">design</span></h2>
     <div class="tb-grid">
-      <div class="tb-proof"><div class="tb-shot"><div><div class="ic">💸</div><div class="ph">[ UPI / payment<br>notification ]</div></div></div><div class="cap"><b>₹6,500 received</b> — first client, week 2.</div></div>
-      <div class="tb-proof"><div class="tb-shot"><div><div class="ic">💬</div><div class="ph">[ client DM:<br>"yes let's start" ]</div></div></div><div class="cap"><b>"When can you begin?"</b> — a closed cold DM.</div></div>
-      <div class="tb-proof"><div class="tb-shot"><div><div class="ic">📈</div><div class="ph">[ earnings /<br>Razorpay graph ]</div></div></div><div class="cap"><b>₹31,200 in month 3</b> — 3 retainer clients.</div></div>
+      <div class="tb-pillar"><div class="ic">🧪</div><h3>Tested, not theory</h3><p>Every idea is a real, working model with the exact 4-step funnel to actually get paid — not a vague list.</p></div>
+      <div class="tb-pillar"><div class="ic">⚖️</div><h3>No hype, ever</h3><p>We show realistic ₹ ranges and the slow first weeks too. No fake income screenshots, no "₹50k in week 1" lies.</p></div>
+      <div class="tb-pillar"><div class="ic">🇮🇳</div><h3>Built for India</h3><p>UPI/Razorpay pricing, Indian client examples, and where to actually find them — not recycled US advice.</p></div>
     </div>
 
-    <div class="tb-lbl" style="margin-top:34px">Built on tools you trust</div>
+    <div class="tb-stats">
+      <div class="tb-stat"><div class="n">50</div><div class="l">ideas + funnels</div></div>
+      <div class="tb-stat"><div class="n">50+</div><div class="l">outreach scripts</div></div>
+      <div class="tb-stat"><div class="n">5</div><div class="l">deep-dives</div></div>
+      <div class="tb-stat"><div class="n">30</div><div class="l">day plan</div></div>
+      <div class="tb-stat"><div class="n">1</div><div class="l">income calculator</div></div>
+    </div>
+
+    <div class="tb-lbl" style="margin-top:34px">Built on tools the pros use</div>
     <div class="tb-tools">
-      <div class="tb-tool"><span class="d"></span>ChatGPT</div>
-      <div class="tb-tool"><span class="d"></span>Claude</div>
-      <div class="tb-tool"><span class="d"></span>Canva</div>
-      <div class="tb-tool"><span class="d"></span>Razorpay</div>
-      <div class="tb-tool"><span class="d"></span>Notion</div>
-      <div class="tb-tool"><span class="d"></span>ElevenLabs</div>
-      <div class="tb-tool"><span class="d"></span>CapCut</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/chatgpt.svg);mask-image:url(logos/chatgpt.svg)"></span>ChatGPT</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/claude.svg);mask-image:url(logos/claude.svg)"></span>Claude</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/gemini.svg);mask-image:url(logos/gemini.svg)"></span>Gemini</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/canva.svg);mask-image:url(logos/canva.svg)"></span>Canva</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/notion.svg);mask-image:url(logos/notion.svg)"></span>Notion</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/elevenlabs.svg);mask-image:url(logos/elevenlabs.svg)"></span>ElevenLabs</div>
+      <div class="tb-tool"><span class="lg" style="-webkit-mask-image:url(logos/razorpay.svg);mask-image:url(logos/razorpay.svg)"></span>Razorpay</div>
     </div>
 
     <div class="tb-founder">
-      <div class="tb-avatar">[ founder<br>photo ]</div>
+      <img src="founder.webp" alt="Sayantan Adhikary, Founder of OptimityFX">
       <div>
-        <div class="nm">Sayantan — Founder, OptimityFX</div>
-        <div class="ro">Tested in the Indian market</div>
-        <p>"I tested every one of these income systems myself before putting them in here. No fake screenshots, no hype — just what actually gets you paid."</p>
+        <div class="nm">Sayantan Adhikary</div>
+        <div class="ro">Founder · OptimityFX</div>
+        <p>"I tested every one of these income systems myself in the real Indian market before putting them in here. No fake screenshots, no hype — just what actually gets you paid."</p>
       </div>
     </div>
     <div class="tb-guarantee">
@@ -1011,8 +1021,8 @@
       </div>
     </div>
   </section>
-
-  <!-- ===== KIT PREVIEW STRIP (placeholder) ===== -->
+."
+"  <!-- ===== KIT PREVIEW STRIP (placeholder) ===== -->
   <section class="reveal" style="margin:34px 0">
     <div class="tb-lbl">A peek inside</div>
     <h2>What's in the <span class="g" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">₹1,499 Kit</span></h2>
