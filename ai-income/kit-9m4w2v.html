@@ -1,92 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>document.documentElement.className+=' js';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="favicon-32x32.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<title>The AI Income Kit — NextGen AI Lab</title>
+<title>AI Income Kit — Member Hub · NextGen AI Lab</title>
 <style>
   :root{
-    --bg:#07090C;--card:#10141B;--card2:#141923;--line:#1E2430;
-    --txt:#FFFFFF;--mut:#9AA3B2;--dim:#5E6776;--acc:#00D4FF;--acc2:#1E90FF;
+    --bg:#07090C;--bg2:#0B0E13;--card:#10141B;--card2:#141923;--line:#1E2430;
+    --txt:#E7EAF0;--mut:#9AA3B2;--dim:#5E6776;--acc:#00D4FF;--acc2:#1E90FF;
     --warn:#F5A623;--bad:#FF3B57;--grad:linear-gradient(135deg,#00D4FF,#1E90FF);
-    --glow:0 0 40px rgba(0,212,255,.25);--radius:18px;
+    --glow:0 0 40px rgba(0,212,255,.22);--radius:16px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:radial-gradient(1200px 600px at 50% -10%,#07111A 0%,var(--bg) 55%);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:80px;overflow-x:hidden}
-  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
-  .brand{display:flex;align-items:center;gap:10px;padding:18px 0;font-weight:700}
-  .logo{width:34px;height:34px;border-radius:9px;background:var(--grad);display:grid;place-items:center;font-size:18px;box-shadow:var(--glow)}
-  .brand small{display:block;font-weight:500;color:var(--mut);font-size:11px;letter-spacing:2px;text-transform:uppercase}
-  .hero{padding:30px 0 6px;text-align:center}
-  .pill{display:inline-block;font-size:12px;font-weight:600;color:var(--acc);background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);padding:6px 14px;border-radius:100px;margin-bottom:18px}
-  h1{font-size:clamp(28px,7vw,44px);line-height:1.14;font-weight:800;letter-spacing:-.5px}
+  body{background:radial-gradient(1100px 500px at 50% -10%,#07111A 0%,var(--bg) 55%);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  /* top bar */
+  .top{position:sticky;top:0;z-index:60;background:rgba(7,9,12,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .top .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 16px}
+  .logo{width:32px;height:32px;border-radius:8px;background:var(--grad);display:grid;place-items:center;font-size:17px;box-shadow:var(--glow);flex-shrink:0}
+  .bname{font-weight:700;font-size:15px;line-height:1.1}
+  .bname small{display:block;font-weight:500;color:var(--mut);font-size:10px;letter-spacing:1.5px;text-transform:uppercase}
+  /* layout */
+  .shell{max-width:1100px;margin:0 auto;display:flex;gap:24px;padding:20px 16px 80px}
+  /* sidebar nav */
+  nav{width:210px;flex-shrink:0;position:sticky;top:72px;align-self:flex-start;max-height:calc(100vh - 90px);overflow:auto}
+  nav a{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;color:var(--mut);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:4px;transition:.15s;border:1px solid transparent}
+  nav a:hover{background:var(--card);color:var(--txt)}
+  nav a.active{background:rgba(0,212,255,.1);color:var(--acc);border-color:rgba(0,212,255,.3)}
+  nav a .e{font-size:16px}
+  main{flex:1;min-width:0}
+  html.js .panel{display:none}
+  .panel.show{display:block;animation:fade .3s}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  h1{font-size:clamp(24px,5vw,32px);font-weight:800;letter-spacing:-.4px;line-height:1.2}
   h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .sub{color:var(--mut);font-size:clamp(15px,4vw,18px);margin:18px auto 0;max-width:560px}
-  .owned{margin-top:20px;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;color:#07090C;background:var(--acc);padding:9px 18px;border-radius:100px}
-  section{margin:32px 0}
-  .eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--acc2);margin-bottom:8px}
-  h2{font-size:clamp(22px,5.5vw,30px);font-weight:800;letter-spacing:-.3px;line-height:1.25}
-  h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  p.lead{color:var(--mut);margin-top:12px;font-size:16px}
-  /* call booking spotlight */
-  .callbox{background:linear-gradient(160deg,#0B0E13,#0B0E13);border:1px solid rgba(0,212,255,.4);border-radius:24px;padding:28px 24px;text-align:center;box-shadow:var(--glow);position:relative;overflow:hidden}
-  .callbox::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 50% 0,rgba(0,212,255,.12),transparent)}
-  .callbox .inner{position:relative}
-  .callbox .ic{font-size:42px}
-  .callbox h2{margin:8px 0}
-  .callbox p{color:var(--mut);margin-top:6px}
-  .scarcity{display:inline-block;font-size:12px;font-weight:700;color:var(--warn);background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.35);padding:6px 14px;border-radius:100px;margin:14px 0 6px}
-  .btn{display:block;width:100%;max-width:420px;margin:14px auto 0;background:var(--grad);color:#07090C;font-weight:800;font-size:17px;padding:17px;border-radius:14px;text-decoration:none;text-align:center;box-shadow:var(--glow)}
-  .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--txt);box-shadow:none;font-size:15px;margin-top:12px}
-  .micro{font-size:12px;color:var(--dim);margin-top:14px}
-  /* module grid */
-  .modgrid{display:grid;gap:14px;margin-top:18px}
-  @media(min-width:560px){.modgrid{grid-template-columns:1fr 1fr}}
-  .mod{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;transition:transform .2s,border-color .2s}
-  .mod:hover{transform:translateY(-2px);border-color:rgba(0,212,255,.4)}
-  .mod .mi{font-size:26px}
-  .mod h3{font-size:16px;margin:8px 0 4px}
-  .mod p{color:var(--mut);font-size:13px}
-  .mod a{display:inline-block;margin-top:12px;font-size:13px;font-weight:700;color:var(--acc);text-decoration:none}
-  /* template/script blocks */
-  .acc{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:12px;overflow:hidden}
-  .acc summary{padding:16px 18px;font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
-  .acc summary::-webkit-details-marker{display:none}
-  .acc summary::after{content:"+";color:var(--acc);font-size:22px;font-weight:400}
-  .acc[open] summary::after{content:"–"}
-  .acc .body{padding:0 18px 18px}
-  .script{background:#060709;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:13.5px;color:var(--txt);white-space:pre-wrap;line-height:1.7;font-family:ui-monospace,Menlo,monospace}
-  .script .v{color:var(--acc)}
-  .copyhint{font-size:11px;color:var(--dim);margin-top:8px;font-style:italic}
-  /* pricing table */
-  .ptable{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-  .ptable th{background:#0B0E13;text-align:left;padding:12px;color:var(--acc2);font-size:12px;text-transform:uppercase;letter-spacing:1px}
-  .ptable td{padding:12px;border-top:1px solid var(--line);color:var(--mut)}
-  .ptable td b{color:var(--txt)}
-  .ptable td .e{color:var(--warn);font-weight:700}
-  /* case study */
-  .case{background:linear-gradient(160deg,#10141B,#0B0E13);border:1px solid rgba(30,144,255,.3);border-radius:var(--radius);padding:22px;margin-top:14px}
-  .case .ct{font-weight:800;font-size:16px;color:var(--acc2)}
-  .case .meta{font-size:12px;color:var(--dim);margin:4px 0 12px}
-  .case ol{margin:0 0 0 18px;font-size:14px}
-  .case ol li{margin:6px 0}
-  .case .res{margin-top:14px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:10px;padding:12px 14px;font-size:13.5px}
+  .lead{color:var(--mut);margin-top:8px;font-size:15px}
+  h2{font-size:18px;font-weight:800;margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+  /* copy card */
+  .cc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+  .cc .h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;cursor:pointer}
+  .cc .h .t{font-weight:700;font-size:14.5px}
+  .cc .h .t .badge{font-size:10px;font-weight:700;color:var(--acc2);background:rgba(30,144,255,.12);padding:2px 8px;border-radius:6px;margin-left:6px;text-transform:uppercase;letter-spacing:.5px}
+  .copybtn{background:var(--grad);color:#07090C;border:0;border-radius:9px;padding:8px 14px;font-weight:800;font-size:12.5px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;transition:transform .12s}
+  .copybtn:active{transform:scale(.95)}
+  .copybtn.done{background:#103A4A;color:#CFE9FF}
+  .cc .body{padding:0 16px 16px}
+  .cc .txt{background:#0B0E13;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:13.5px;color:var(--txt);white-space:pre-wrap;line-height:1.7;font-family:ui-monospace,Menlo,monospace}
+  .cc .txt .v{color:var(--acc)}
+  .hint{font-size:11.5px;color:var(--dim);margin-top:8px;font-style:italic}
+  .cat{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--acc2);margin:24px 0 10px}
+  /* download cards */
+  .dlgrid{display:grid;gap:12px;grid-template-columns:1fr}
+  @media(min-width:600px){.dlgrid{grid-template-columns:1fr 1fr}}
+  .dl{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:.2s}
+  .dl:hover{border-color:rgba(0,212,255,.4);transform:translateY(-2px)}
+  .dl .ic{font-size:26px}
+  .dl h3{font-size:15px;margin:8px 0 4px}
+  .dl p{font-size:12.5px;color:var(--mut);margin-bottom:12px}
+  .dlbtns{display:flex;flex-wrap:wrap;gap:8px}
+  .dlbtn{font-size:12.5px;font-weight:700;text-decoration:none;padding:8px 13px;border-radius:9px;display:inline-flex;align-items:center;gap:6px}
+  .dlbtn.primary{background:var(--grad);color:#07090C}
+  .dlbtn.alt{background:#0B0E13;border:1px solid var(--line);color:var(--mut)}
+  /* misc */
+  .box{background:linear-gradient(160deg,#0B0E13,#0B0E13);border:1px solid rgba(0,212,255,.3);border-radius:var(--radius);padding:20px;box-shadow:var(--glow)}
+  .box.blue{background:linear-gradient(160deg,#10141B,#0B0E13);border-color:rgba(30,144,255,.3);box-shadow:none}
+  .box.warn{background:rgba(245,166,35,.06);border-color:rgba(245,166,35,.3);box-shadow:none}
+  .steps{display:grid;gap:10px;margin-top:14px}
+  .step{display:flex;gap:12px;align-items:flex-start}
+  .step .sn{width:26px;height:26px;border-radius:7px;background:var(--grad);color:#07090C;font-weight:800;display:grid;place-items:center;flex-shrink:0;font-size:13px}
+  .step b{font-size:14px}.step .sd{color:var(--mut);font-size:13px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th{background:#0B0E13;text-align:left;padding:11px;color:var(--acc2);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+  td{padding:11px;border-top:1px solid var(--line);color:var(--mut)}
+  td b{color:var(--txt)}td .e{color:var(--warn);font-weight:700}
+  .check li{list-style:none;padding:9px 0 9px 30px;position:relative;font-size:14px;border-bottom:1px solid rgba(255,255,255,.05)}
+  .check li::before{content:"☐";position:absolute;left:0;color:var(--acc);font-size:17px}
+  .wk{font-size:12px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:1px;margin:18px 0 6px}
+  .case{background:linear-gradient(160deg,#10141B,#0B0E13);border:1px solid rgba(30,144,255,.3);border-radius:var(--radius);padding:18px;margin-bottom:12px}
+  .case .ct{font-weight:800;font-size:15px;color:var(--acc2)}
+  .case .meta{font-size:11.5px;color:var(--dim);margin:3px 0 10px}
+  .case ol{margin:0 0 0 18px;font-size:13.5px}.case ol li{margin:5px 0}
+  .case .res{margin-top:12px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:9px;padding:10px 12px;font-size:13px}
   .case .res b{color:var(--acc)}
-  .note{font-size:11.5px;color:var(--dim);margin-top:10px;font-style:italic}
-  /* checklist */
-  .check{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .check li{list-style:none;padding:11px 0 11px 32px;position:relative;border-bottom:1px solid rgba(255,255,255,.05);font-size:14.5px}
-  .check li:last-child{border:0}
-  .check li::before{content:"☐";position:absolute;left:0;color:var(--acc);font-size:18px}
-  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:34px 0}
-  footer{text-align:center;color:var(--dim);font-size:12px;padding:30px 0 10px}
-  .support{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
-  .avatar{width:48px;height:48px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-size:20px;flex-shrink:0}
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
-  .reveal.in{opacity:1!important;transform:none!important}
-  .sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(10,11,20,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:12px 16px;z-index:50;text-align:center}
-  .sticky a{display:inline-block;background:var(--grad);color:#07090C;font-weight:800;font-size:15px;padding:13px 28px;border-radius:11px;text-decoration:none;box-shadow:var(--glow)}
+  a.inline{color:var(--acc)}
+  /* mobile bottom nav */
+  .mnav{display:none}
+  @media(max-width:760px){
+    nav{display:none}
+    .shell{padding-bottom:80px}
+    .mnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(7,9,12,.95);backdrop-filter:blur(14px);border-top:1px solid var(--line);overflow-x:auto}
+    .mnav a{flex:0 0 auto;text-align:center;padding:10px 14px;color:var(--mut);text-decoration:none;font-size:11px;font-weight:600;border-top:2px solid transparent}
+    .mnav a .e{display:block;font-size:18px;margin-bottom:2px}
+    .mnav a.active{color:var(--acc);border-top-color:var(--acc)}
+  }
+  .toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(20px);background:#103A4A;color:#CFE9FF;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13.5px;opacity:0;transition:.3s;z-index:100;pointer-events:none;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  /* ===== full calculator ===== */
+  .fcalc{display:grid;gap:16px}
+  .seg{display:flex;background:#0B0E13;border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+  .seg button{flex:1;background:none;border:0;color:var(--mut);font-weight:700;font-size:13px;padding:10px;border-radius:9px;cursor:pointer;transition:.15s}
+  .seg button.on{background:var(--grad);color:#07090C}
+  .panelcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .panelcard h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .stream{display:grid;grid-template-columns:1fr 64px 84px 30px;gap:8px;align-items:center;margin-bottom:8px}
+  .stream input{background:#0B0E13;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:9px;font-size:13px;width:100%}
+  .stream .rm{background:rgba(255,59,87,.12);border:1px solid rgba(255,59,87,.3);color:#FF3B57;border-radius:8px;height:34px;cursor:pointer;font-weight:800}
+  .shead{display:grid;grid-template-columns:1fr 64px 84px 30px;gap:8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:6px;font-weight:700}
+  .addbtn{background:rgba(0,212,255,.1);border:1px dashed rgba(0,212,255,.4);color:var(--acc);font-weight:700;font-size:13px;padding:10px;border-radius:10px;cursor:pointer;width:100%}
+  .frow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0}
+  .frow label{font-size:13.5px;font-weight:600}
+  .frow input{background:#0B0E13;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:9px 11px;font-size:14px;width:130px;text-align:right;font-family:ui-monospace,monospace}
+  .frow input[type=range]{width:150px;padding:0}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  @media(min-width:520px){.statgrid{grid-template-columns:repeat(3,1fr)}}
+  .stat{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(30,144,255,.08));border:1px solid rgba(0,212,255,.25);border-radius:14px;padding:14px;text-align:center}
+  .stat .sl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700}
+  .stat .sv{font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-top:3px}
+  .graphwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:4px}
+  .graphwrap h3{font-size:14px;margin-bottom:6px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
+  .actions button{flex:1;min-width:130px;font-weight:800;font-size:14px;padding:13px;border-radius:11px;cursor:pointer;border:0}
+  .actsave{background:#0B0E13;border:1px solid var(--line)!important;color:var(--txt)}
+  .actexp{background:var(--grad);color:#07090C}
+  .goalout{background:rgba(30,144,255,.08);border:1px solid rgba(30,144,255,.3);border-radius:12px;padding:16px;font-size:14px;line-height:1.7;margin-top:8px}
+  .goalout b{color:var(--acc)}
+  .disc{font-size:11px;color:var(--dim);font-style:italic;margin-top:6px}
   /* ===== pro effects ===== */
   #fx{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(600px 420px at 14% 8%,rgba(0,212,255,.10),transparent 60%),radial-gradient(720px 520px at 86% 22%,rgba(30,144,255,.10),transparent 60%);animation:fxshift 16s ease-in-out infinite}
   #fx::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(circle at 50% 16%,#000,transparent 78%);mask-image:radial-gradient(circle at 50% 16%,#000,transparent 78%)}
@@ -94,333 +133,439 @@
   #hud{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;background:var(--grad);box-shadow:0 0 10px rgba(0,212,255,.7);transition:width .12s ease-out}
   .logo{animation:logopulse 3.2s ease-in-out infinite}
   @keyframes logopulse{0%,100%{box-shadow:0 0 18px rgba(0,212,255,.30)}50%{box-shadow:0 0 34px rgba(0,212,255,.6)}}
-  .btn{position:relative;overflow:hidden}
-  .btn::after{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite}
-  @keyframes shine{0%{left:-120%}55%,100%{left:170%}}
-  @media (prefers-reduced-motion:reduce){#fx,.logo,.btn::after{animation:none!important}}
-  @media print{#fx,#hud{display:none!important}.logo,.btn::after{animation:none!important}}
+  .copybtn,.dlbtn.primary{position:relative;overflow:hidden}
+  .copybtn::after,.dlbtn.primary::after{content:"";position:absolute;top:0;left:-130%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite}
+  @keyframes shine{0%{left:-130%}55%,100%{left:180%}}
+  .cc:hover,.dl:hover{box-shadow:0 8px 30px rgba(0,0,0,.3)}
+  @media (prefers-reduced-motion:reduce){#fx,.logo,.copybtn::after,.dlbtn.primary::after{animation:none!important}}
 </style>
 <style>body{font-family:'Inter',system-ui,-apple-system,sans-serif}h1,h2,h3,.calc h3,.upsell h2,.result .rn,.new{font-family:'Inter',system-ui,sans-serif;font-weight:800;letter-spacing:-.02em}.eyebrow,.pill,.tag,.kick,.scarcity,.coupon .lab{font-family:'Courier New',monospace;letter-spacing:.04em}.brand{align-items:center}.brand-img{height:30px;width:auto;display:block}</style></head>
-<body>
-<!-- ===== ACCESS GATE (members only) ===== -->
-<div id="gate" style="position:fixed;inset:0;z-index:99999;background:#07090C;display:grid;place-items:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
-  <div style="max-width:380px;width:100%;text-align:center;background:#10141B;border:1px solid #1E2430;border-radius:18px;padding:30px 24px;box-shadow:0 20px 60px rgba(0,0,0,.5)">
-    <div style="width:48px;height:48px;margin:0 auto 16px;border-radius:12px;background:linear-gradient(135deg,#00D4FF,#1E90FF);display:grid;place-items:center;font-size:24px">🔒</div>
-    <h2 style="color:#FFFFFF;font-size:20px;font-weight:800;margin:0 0 6px">Members only</h2>
-    <p style="color:#9AA3B2;font-size:14px;margin:0 0 18px">Enter the access code from your purchase confirmation to unlock the Kit.</p>
-    <input id="gateCode" type="text" placeholder="Access code" autocomplete="off" style="width:100%;background:#0B0E13;border:1px solid #1E2430;color:#FFFFFF;border-radius:10px;padding:13px;font-size:15px;text-align:center;letter-spacing:1px;outline:none">
-    <div id="gateErr" style="color:#FF3B57;font-size:12.5px;height:16px;margin:8px 0 0"></div>
-    <button id="gateBtn" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#00D4FF,#1E90FF);color:#07090C;font-weight:800;font-size:15px;padding:14px;border:0;border-radius:11px;cursor:pointer">Unlock →</button>
-    <p style="color:#5E6776;font-size:11.5px;margin:16px 0 0">Lost your code? Email support@optimityfx.com</p>
-  </div>
-</div>
-<script>
-(function(){
-  var HASH="c3d8d37e0053885c86dc2820a29345db0362c5529778d470255dbbeb40839e94", KEY="ngl_kit_unlock", g=document.getElementById('gate');
-  document.documentElement.style.overflow='hidden';
-  function open_(){if(g&&g.parentNode){g.parentNode.removeChild(g);}document.documentElement.style.overflow='';}
-  try{if(localStorage.getItem(KEY)==='1'){open_();return;}}catch(e){}
-  async function sha(s){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
-  var inp=document.getElementById('gateCode'),btn=document.getElementById('gateBtn'),err=document.getElementById('gateErr');
-  async function tryCode(){var v=(inp.value||'').trim();if(!v)return;var h;try{h=await sha(v);}catch(e){err.textContent='Open this page over https to unlock.';return;}if(h===HASH){try{localStorage.setItem(KEY,'1');}catch(e){}open_();}else{err.textContent='Incorrect code. Check your confirmation email.';}}
-  btn.addEventListener('click',tryCode);
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryCode();});
-  inp.focus();
-})();
-</script>
-<!-- ===== /ACCESS GATE ===== -->
+<body><div id="gate" style="position:fixed;inset:0;z-index:99999;background:#07090C;display:grid;place-items:center;padding:24px;font-family:Inter,system-ui,sans-serif"><div style="max-width:380px;width:100%;text-align:center;background:#10141B;border:1px solid #1E2430;border-radius:18px;padding:30px 24px;box-shadow:0 20px 60px rgba(0,0,0,.5)"><div style="width:48px;height:48px;margin:0 auto 16px;border-radius:12px;background:linear-gradient(135deg,#00D4FF,#1E90FF);display:grid;place-items:center;font-size:24px">&#128274;</div><h2 style="color:#E7EAF0;font-size:20px;font-weight:800;margin:0 0 6px">Members only</h2><p style="color:#9AA3B2;font-size:14px;margin:0 0 18px">Enter the access code from your purchase confirmation to unlock the Kit.</p><input id="gateCode" type="text" placeholder="Access code" autocomplete="off" style="width:100%;background:#0B0E13;border:1px solid #1E2430;color:#E7EAF0;border-radius:10px;padding:13px;font-size:15px;text-align:center;letter-spacing:1px;outline:none"><div id="gateErr" style="color:#FF3B57;font-size:12.5px;height:16px;margin:8px 0 0"></div><button id="gateBtn" style="width:100%;margin-top:10px;background:linear-gradient(135deg,#00D4FF,#1E90FF);color:#07090C;font-weight:800;font-size:15px;padding:14px;border:0;border-radius:11px;cursor:pointer">Unlock &#8594;</button><p style="color:#5E6776;font-size:11.5px;margin:16px 0 0">Lost your code? Email support@optimityfx.com</p></div></div><script>(function(){var HASH="c3d8d37e0053885c86dc2820a29345db0362c5529778d470255dbbeb40839e94",KEY="ngl_kit_unlock",g=document.getElementById("gate");document.documentElement.style.overflow="hidden";function o(){if(g&&g.parentNode){g.parentNode.removeChild(g);}document.documentElement.style.overflow="";}try{if(localStorage.getItem(KEY)==="1"){o();return;}}catch(e){}async function sha(s){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0");}).join("");}var inp=document.getElementById("gateCode"),btn=document.getElementById("gateBtn"),err=document.getElementById("gateErr");async function t(){var v=(inp.value||"").trim();if(!v)return;var h;try{h=await sha(v);}catch(e){err.textContent="Open this page over https to unlock.";return;}if(h===HASH){try{localStorage.setItem(KEY,"1");}catch(e){}o();}else{err.textContent="Incorrect code. Check your confirmation email.";}}btn.addEventListener("click",t);inp.addEventListener("keydown",function(e){if(e.key==="Enter")t();});inp.focus();})();</script>
+
 <div id="fx"></div><div id="hud"></div>
-<div class="wrap">
+<div class="top"><div class="inner">
+  <a href="https://optimityfx.com" style="display:flex;align-items:center"><img src="logo-nav.webp" alt="OptimityFX" class="brand-img"></a>
+  <div class="bname">NextGen AI Lab<small>Powered by OptimityFX</small></div>
+</div></div>
 
-  <div class="brand"><a href="https://optimityfx.com" style="display:flex;align-items:center"><img src="logo-nav.webp" alt="OptimityFX" class="brand-img"></a></div>
+<div class="shell">
 
-  <!-- HERO -->
-  <div class="hero reveal">
-    <span class="pill">🔓 KIT UNLOCKED · MEMBER ACCESS</span>
-    <h1>Your Done-For-You <span class="g">AI Income Kit</span></h1>
-    <p class="sub">Everything you need to land your first client this month — scripts to copy, prices to charge, templates to send, and a 30-day plan to follow.</p>
-    <div class="owned">✅ Welcome — your access is active</div>
-  </div>
+  <!-- SIDEBAR -->
+  <nav id="nav">
+    <a data-tab="start" class="active"><span class="e">🎯</span> Start Here</a>
+    <a data-tab="scripts"><span class="e">💬</span> Outreach Scripts</a>
+    <a data-tab="prompts"><span class="e">🧠</span> Prompt Library</a>
+    <a data-tab="pricing"><span class="e">💰</span> Pricing Guide</a>
+    <a data-tab="calc"><span class="e">🧮</span> Income Calculator</a>
+    <a data-tab="templates"><span class="e">🎨</span> Templates</a>
+    <a data-tab="plan"><span class="e">✅</span> 30-Day Plan</a>
+    <a data-tab="cases"><span class="e">📈</span> Case Studies</a>
+    <a data-tab="support"><span class="e">💡</span> Support</a>
+  </nav>
 
-  <!-- 1. START HERE -->
-  <section class="reveal">
-    <div class="callbox">
-      <div class="inner">
-        <div class="ic">🎯</div>
-        <h2>Step 1: Pick <span class="g">ONE idea</span> & start</h2>
-        <p>Don't try to use everything at once. Choose the single idea that fits your skills + free hours, then work through the modules below in order. Clarity beats confusion.</p>
-        <a class="btn" href="#scripts">👇 Start with the outreach scripts</a>
-        <div class="micro">Tip: open the 30-Day Launch Plan (Module 6) and follow it day by day. Need help? Email support@optimityfx.com</div>
+  <main>
+    <!-- ===== START ===== -->
+    <section class="panel show" id="start">
+      <h1>Welcome to your <span class="g">AI Income Kit</span> 🎉</h1>
+      <p class="lead">Everything you need to land your first client — all in one place. Tap a section on the left (or the bottom bar on mobile).</p>
+      <div class="box" style="margin-top:18px">
+        <b style="font-size:16px">🎯 Step 1: Pick ONE idea & start</b>
+        <p style="color:var(--mut);margin-top:6px;font-size:14px">Don't try everything at once. Choose the single idea that fits your skills + free hours, then work the sections in order.</p>
+        <div class="steps">
+          <div class="step"><div class="sn">1</div><div><b>Copy your scripts</b><div class="sd">Go to Outreach Scripts → tap Copy → paste & send.</div></div></div>
+          <div class="step"><div class="sn">2</div><div><b>Use the prompts</b><div class="sd">Prompt Library → copy → paste into ChatGPT/Claude.</div></div></div>
+          <div class="step"><div class="sn">3</div><div><b>Look professional</b><div class="sd">Download the portfolio, service menu & invoice templates.</div></div></div>
+          <div class="step"><div class="sn">4</div><div><b>Follow the plan</b><div class="sd">Work the 30-Day Plan one day at a time.</div></div></div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 2. WHAT'S INSIDE -->
-  <section class="reveal">
-    <span class="eyebrow">Your Toolkit</span>
-    <h2>Everything <span class="g">inside the Kit</span></h2>
-    <div class="modgrid">
-      <div class="mod"><div class="mi">💬</div><h3>50+ Outreach Scripts</h3><p>DM, email & WhatsApp scripts to land clients. Fill the blanks & send.</p><a href="#scripts">Jump to scripts →</a></div>
-      <div class="mod"><div class="mi">💰</div><h3>Pricing & Proposal Kit</h3><p>Exactly what to charge + a proposal template that closes.</p><a href="#pricing">Jump to pricing →</a></div>
-      <div class="mod"><div class="mi">🧠</div><h3>Prompt Library</h3><p>Tested AI prompts organised by all 50 ideas.</p><a href="#prompts">Jump to prompts →</a></div>
-      <div class="mod"><div class="mi">🎨</div><h3>Templates Vault</h3><p>Canva + Notion: portfolio, service menu, invoice, content planner.</p><a href="#templates">Jump to vault →</a></div>
-      <div class="mod"><div class="mi">📈</div><h3>3 Case Studies</h3><p>Real step-by-step breakdowns you can copy.</p><a href="#cases">Jump to cases →</a></div>
-      <div class="mod"><div class="mi">✅</div><h3>30-Day Launch Plan</h3><p>A daily checklist from zero to first client.</p><a href="#plan">Jump to plan →</a></div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 3. SCRIPTS -->
-  <section class="reveal" id="scripts">
-    <span class="eyebrow">Module 1</span>
-    <h2>💬 Client Outreach <span class="g">Scripts</span></h2>
-    <p class="lead">Replace the <span style="color:var(--acc)">[green]</span> parts and send. These are written to start conversations, not get ignored.</p>
-
-    <details class="acc" open>
-      <summary>📩 Instagram DM — cold (service offer)</summary>
-      <div class="body">
-        <div class="script">Hi <span class="v">[Name]</span> 👋 I came across <span class="v">[their business]</span> — love what you're doing with <span class="v">[specific detail]</span>.
-
-I noticed your <span class="v">[captions/photos/page]</span> could pull in more customers with a small tweak. I actually made you a free sample so you can see what I mean — no strings 👇
-
-<span class="v">[attach 1 sample]</span>
-
-If you like it, I help businesses like yours with <span class="v">[service]</span>. Want me to share a quick plan?</div>
-        <div class="copyhint">Why it works: leads with a free gift, not a pitch. Reply rate jumps 3–4x.</div>
+      <div class="box warn" style="margin-top:14px">
+        <b>⚠️ Honest reality check</b>
+        <p style="color:var(--mut);margin-top:6px;font-size:14px">These tools save time and make you look professional — but they don't replace the work. Reach out daily, deliver well, ask every happy client for a referral. Your first 2–4 weeks may earn ₹0 — that's normal. Don't quit there.</p>
       </div>
-    </details>
+    </section>
 
-    <details class="acc">
-      <summary>📧 Cold email — to founders/brands</summary>
-      <div class="body">
-        <div class="script">Subject: quick idea for <span class="v">[Brand]</span>'s <span class="v">[area]</span>
+    <!-- ===== SCRIPTS ===== -->
+    <section class="panel" id="scripts">
+      <h1>💬 Outreach <span class="g">Scripts</span></h1>
+      <p class="lead">Tap <b>Copy</b>, paste anywhere, replace the <span style="color:var(--acc)">[green]</span> parts, send.</p>
 
-Hi <span class="v">[Name]</span>,
+      <div class="cat">📩 Instagram DMs</div>
+      <!-- script cards injected pattern -->
+      <div class="cc"><div class="h"><div class="t">Cold DM with free gift <span class="badge">best reply rate</span></div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Hi [Name] 👋 Came across [their business] — love what you're doing with [specific detail]. I noticed your [captions/photos/page] could pull in more customers with a small tweak, so I made you a free sample to show what I mean — no strings 👇 [attach sample]. If you like it, I help businesses like yours with [service]. Want a quick plan?</div><div class="hint">Leads with a gift, not a pitch — replies jump 3–4x.</div></div></div>
 
-I rewrote your <span class="v">[welcome email/product page/ad]</span> — attaching it so you can judge for yourself (took me 20 min with my system).
+      <div class="cc"><div class="h"><div class="t">Cold DM — short version</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Hey [Name]! I help [type of business] get more [result] with [service]. Made a quick free sample for you — mind if I send it over?</div></div></div>
 
-If it's useful, I do this for <span class="v">[type of brands]</span> on a simple monthly plan. Worth a 10-min call this week?
+      <div class="cat">📧 Cold Emails</div>
+      <div class="cc"><div class="h"><div class="t">Founder email (show, don't tell)</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Subject: quick idea for [Brand]'s [area]
 
-<span class="v">[Your name]</span> · <span class="v">[portfolio link]</span></div>
-        <div class="copyhint">Keep it under 80 words. Show, don't tell.</div>
+Hi [Name], I rewrote your [welcome email/product page/ad] — attaching it so you can judge for yourself (took 20 min with my system). If useful, I do this for [type of brands] on a simple monthly plan. Worth a 10-min call this week?
+
+[Your name] · [portfolio link]</div></div></div>
+
+      <div class="cc"><div class="h"><div class="t">Service pitch email</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Subject: helping [Brand] save time on [task]
+
+Hi [Name], I help [businesses like theirs] with [service] using AI — faster and cheaper than an agency. Here's a sample of my work: [link]. Open to a quick chat?</div></div></div>
+
+      <div class="cat">📱 WhatsApp</div>
+      <div class="cc"><div class="h"><div class="t">Warm / referral intro</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Hi [Name]! [Referrer] mentioned you're looking for help with [service]. I've helped [similar client] get [result]. Happy to do a free [audit/sample] first so you can see if it's a fit — shall I?</div></div></div>
+
+      <div class="cc"><div class="h"><div class="t">Festival / season offer</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Hi [Name]! [Festival] is coming — a great time to boost [their business]. I'm offering [service] at a special rate till [date]. Want the details?</div></div></div>
+
+      <div class="cat">🔁 Follow-ups (50% of deals come from these)</div>
+      <div class="cc"><div class="h"><div class="t">Gentle follow-up</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Hey [Name], floating this back to the top 🙂 Should I send over that [sample/plan], or is now not the right time?</div></div></div>
+
+      <div class="cc"><div class="h"><div class="t">Scarcity follow-up</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Hi [Name], I have 1 slot opening up next week. Want me to hold it for you?</div></div></div>
+
+      <div class="cat">💵 Closing</div>
+      <div class="cc"><div class="h"><div class="t">Close (price + timeline + next step)</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Great! Here's how it works: [deliverable] for ₹[price]. I take 50% to start and 50% on delivery via UPI. I can begin [day] and deliver by [day]. Shall I send the payment link?</div><div class="hint">Always state price + timeline + next step in ONE message.</div></div></div>
+
+      <div class="cc"><div class="h"><div class="t">Handle "it's too expensive"</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Totally understand! I also have a [smaller package] at ₹[lower price] that covers [core deliverable] — want me to start you there?</div></div></div>
+
+      <div class="cc"><div class="h"><div class="t">After delivery — ask for review + referral</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">So glad you liked it, [Name]! Two quick favours: (1) could you share a 1-line review I can show others? (2) Know anyone else who needs [service]? I'll give them the same care 🙏</div></div></div>
+    </section>
+
+    <!-- ===== PROMPTS ===== -->
+    <section class="panel" id="prompts">
+      <h1>🧠 Prompt <span class="g">Library</span></h1>
+      <p class="lead">Copy → paste into ChatGPT or Claude → fill the <span style="color:var(--acc)">[blanks]</span>.</p>
+
+      <div class="cat">✍️ Content & Writing</div>
+      <div class="cc"><div class="h"><div class="t">Instagram captions</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Act as a social media copywriter. Write 10 Instagram captions for [business type] targeting [audience]. Tone: [friendly/premium]. Each caption: a scroll-stopping first line, value, and a CTA. Add 5 relevant hashtags each.</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Blog / SEO article</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Write a 1000-word SEO blog post on "[topic]" for [audience]. Include an H1, 4 H2 subheadings, a meta description, and naturally use these keywords: [keywords]. Tone: [tone].</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Resume rewrite</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">You are an expert resume writer. Rewrite the resume below for a [role] position. Use strong action verbs, quantify achievements, optimise for ATS with [industry] keywords, keep to 1 page. Resume: [paste].</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Product description (e-commerce)</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Write a high-converting product description for [product]. Include a benefit-driven headline, 4 feature→benefit bullets, a short emotional paragraph, and SEO keywords: [keywords]. Tone: [brand voice].</div></div></div>
+
+      <div class="cat">📱 Social & Marketing</div>
+      <div class="cc"><div class="h"><div class="t">30-day content calendar</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Create a 30-day Instagram content calendar for [business]. For each day give: content type (reel/carousel/story), a hook, and a caption idea. Mix education, entertainment, and promotion in a 3:1 ratio.</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Ad copy + hooks</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Write 10 scroll-stopping ad hooks and 3 full ad copies for [product] targeting [audience] on [Meta/Google]. Focus on [pain point]. Avoid income guarantees or unrealistic claims.</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Reel / video script</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Write a 30-second reel script for [topic] aimed at [audience]. Start with a 3-second hook, deliver 3 quick value points, end with a CTA. Add on-screen text suggestions.</div></div></div>
+
+      <div class="cat">🎨 Design & Creative</div>
+      <div class="cc"><div class="h"><div class="t">Product photo scene (image prompt)</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">A professional studio product photo of [product] on [surface/background], [lighting style] lighting, [mood], high detail, e-commerce ready, 1:1 ratio.</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Thumbnail ideas</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Suggest 5 high-CTR YouTube thumbnail concepts for a video titled "[title]". For each: main text (3-4 words), facial expression, and background idea.</div></div></div>
+
+      <div class="cat">🤖 Automation & Tech</div>
+      <div class="cc"><div class="h"><div class="t">Chatbot FAQ flow</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Create a customer-support chatbot script for a [business]. List the top 15 FAQs with concise answers, a greeting, a lead-capture step (name + phone), and a fallback to connect to a human.</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Automation audit</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">I run a [business]. List 10 repetitive manual tasks I could automate with AI/no-code tools (Make/Zapier), the tools to use for each, and the rough time saved per week.</div></div></div>
+
+      <div class="cat">💼 Sales & Client Work</div>
+      <div class="cc"><div class="h"><div class="t">Proposal generator</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">Write a short, persuasive project proposal. Client: [name/business]. Their problem: [problem]. My service: [service]. Deliverables: [list]. Price: ₹[price]. Keep it under 250 words, confident but not pushy.</div></div></div>
+      <div class="cc"><div class="h"><div class="t">Price objection responder</div><button class="copybtn">⧉ Copy</button></div><div class="body"><div class="txt">A client says my price of ₹[price] for [service] is too high. Give me 3 polite, confident responses that reframe value without immediately discounting.</div></div></div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section class="panel" id="pricing">
+      <h1>💰 Pricing <span class="g">Guide</span> (India 2026)</h1>
+      <p class="lead">Start here, deliver well, raise prices every 3–5 clients.</p>
+      <table>
+        <tr><th>Service</th><th>Starter</th><th>Scale to</th></tr>
+        <tr><td><b>Resume / LinkedIn</b></td><td>₹299–699</td><td><span class="e">₹1,499+</span></td></tr>
+        <tr><td><b>Social post pack</b></td><td>₹2–4k/mo</td><td><span class="e">₹10–15k/mo</span></td></tr>
+        <tr><td><b>Full SMM retainer</b></td><td>₹8k/mo</td><td><span class="e">₹25k/mo</span></td></tr>
+        <tr><td><b>Product photo (set)</b></td><td>₹300–500</td><td><span class="e">₹1,500</span></td></tr>
+        <tr><td><b>Ad creatives pack</b></td><td>₹3k</td><td><span class="e">₹6–10k</span></td></tr>
+        <tr><td><b>Chatbot setup</b></td><td>₹5k + ₹1k/mo</td><td><span class="e">₹15k + ₹3k/mo</span></td></tr>
+        <tr><td><b>No-code website</b></td><td>₹5–8k</td><td><span class="e">₹20k+</span></td></tr>
+      </table>
+      <div class="box blue" style="margin-top:16px">
+        <b>🧠 5 pricing rules</b>
+        <ol style="margin:10px 0 0 18px;color:var(--mut);font-size:14px">
+          <li>Charge for the <b style="color:var(--txt)">outcome</b>, not the hours.</li>
+          <li>Start low for your first 3 clients (for reviews), then raise fast.</li>
+          <li>Always offer 3 tiers — most pick the middle (make it your target).</li>
+          <li>Use prices ending in 9 (₹2,999 not ₹3,000).</li>
+          <li>Prefer monthly retainers over one-off jobs.</li>
+        </ol>
       </div>
-    </details>
+      <div class="box warn" style="margin-top:14px"><b>💳 Always take 50% advance.</b><p style="color:var(--mut);margin-top:6px;font-size:14px">It filters non-serious clients and protects you. Send a proper invoice (Templates tab) — it makes you look established.</p></div>
+    </section>
 
-    <details class="acc">
-      <summary>📱 WhatsApp — warm/referral follow-up</summary>
-      <div class="body">
-        <div class="script">Hi <span class="v">[Name]</span>! <span class="v">[Referrer]</span> mentioned you're looking for help with <span class="v">[service]</span>.
+    <!-- ===== CALCULATOR ===== -->
+    <section class="panel" id="calc">
+      <h1>🧮 Income <span class="g">Calculator</span> <span style="font-size:13px;color:var(--acc);vertical-align:middle">FULL</span></h1>
+      <p class="lead">Model multiple income streams, subtract costs, see a 12-month projection — or work backwards from a goal.</p>
 
-I've helped <span class="v">[similar client]</span> get <span class="v">[result]</span>. Happy to do a free <span class="v">[audit/sample]</span> for you first so you can see if it's a fit — shall I?</div>
-        <div class="copyhint">Referrals close 5x easier — always ask every happy client for one.</div>
+      <div class="seg" style="margin-top:16px">
+        <button class="on" data-mode="plan">📊 Plan my income</button>
+        <button data-mode="goal">🎯 Reverse goal</button>
       </div>
-    </details>
 
-    <details class="acc">
-      <summary>🔁 Follow-up (no reply after 3 days)</summary>
-      <div class="body">
-        <div class="script">Hey <span class="v">[Name]</span>, floating this back up 🙂 No pressure at all — should I send over that <span class="v">[sample/plan]</span>, or is now not the right time?</div>
-        <div class="copyhint">~50% of deals come from the follow-up. Always send 1–2.</div>
+      <!-- PLAN MODE -->
+      <div class="fcalc" id="planView" style="margin-top:16px">
+        <div class="panelcard">
+          <h3>💼 Your income streams</h3>
+          <div class="shead"><span>Service / idea</span><span>Clients</span><span>₹ / client</span><span></span></div>
+          <div id="streams"></div>
+          <button class="addbtn" id="addStream">＋ Add another stream</button>
+        </div>
+
+        <div class="panelcard">
+          <h3>⚙️ Costs & growth</h3>
+          <div class="frow"><label>Monthly expenses (₹)</label><input type="number" id="expenses" value="2000" min="0"></div>
+          <div class="frow"><label>Expected monthly growth: <span id="growthVal" style="color:var(--acc);font-weight:800">8%</span></label><input type="range" id="growth" min="0" max="30" value="8"></div>
+        </div>
+
+        <div class="statgrid">
+          <div class="stat"><div class="sl">Revenue / mo</div><div class="sv" id="sRev">₹0</div></div>
+          <div class="stat"><div class="sl">Net profit / mo</div><div class="sv" id="sNet">₹0</div></div>
+          <div class="stat"><div class="sl">Year 1 total</div><div class="sv" id="sYear">₹0</div></div>
+        </div>
+
+        <div class="graphwrap">
+          <h3>📈 12-month profit projection</h3>
+          <svg id="projGraph" viewBox="0 0 600 240" style="width:100%;height:auto"></svg>
+        </div>
+
+        <div class="actions">
+          <button class="actsave" id="saveBtn">💾 Save my plan</button>
+          <button class="actexp" id="expBtn">⬇ Export summary</button>
+        </div>
       </div>
-    </details>
 
-    <details class="acc">
-      <summary>💵 Closing — turning interest into payment</summary>
-      <div class="body">
-        <div class="script">Great! Here's how it works: <span class="v">[deliverable]</span> for <span class="v">[₹price]</span>. I take 50% to start and 50% on delivery via UPI. I can begin <span class="v">[day]</span> and deliver by <span class="v">[day]</span>. Shall I send the payment link?</div>
-        <div class="copyhint">Always state price + timeline + next step in ONE message. Reduces drop-off.</div>
+      <!-- GOAL MODE -->
+      <div class="fcalc" id="goalView" style="margin-top:16px;display:none">
+        <div class="panelcard">
+          <h3>🎯 Work backwards from your goal</h3>
+          <div class="frow"><label>Target income / month (₹)</label><input type="number" id="gTarget" value="50000" min="0"></div>
+          <div class="frow"><label>Avg price per client (₹)</label><input type="number" id="gPrice" value="10000" min="1"></div>
+          <div class="frow"><label>Working days / month</label><input type="number" id="gDays" value="22" min="1" max="31"></div>
+        </div>
+        <div class="goalout" id="goalOut"></div>
       </div>
-    </details>
-    <p class="note">Full Kit includes 50+ scripts across all 6 service categories — these 5 are your starters.</p>
-  </section>
 
-  <div class="divider"></div>
+      <p class="disc">All figures are illustrative estimates to help you plan — not income guarantees. Your real results depend on your effort, skill and consistency.</p>
+    </section>
 
-  <!-- 4. PRICING -->
-  <section class="reveal" id="pricing">
-    <span class="eyebrow">Module 2</span>
-    <h2>💰 What to <span class="g">Charge</span> (India rates)</h2>
-    <p class="lead">Stop guessing. Start here, deliver well, then raise prices every 3–5 clients.</p>
-    <table class="ptable">
-      <tr><th>Service</th><th>Starter price</th><th>Scale to</th></tr>
-      <tr><td><b>Resume / LinkedIn</b></td><td>₹299–699</td><td><span class="e">₹1,499+</span></td></tr>
-      <tr><td><b>Social media post pack</b></td><td>₹2–4k/mo</td><td><span class="e">₹10–15k/mo</span></td></tr>
-      <tr><td><b>Full SMM retainer</b></td><td>₹8k/mo</td><td><span class="e">₹25k/mo</span></td></tr>
-      <tr><td><b>Product photo (set)</b></td><td>₹300–500</td><td><span class="e">₹1,500</span></td></tr>
-      <tr><td><b>Chatbot setup</b></td><td>₹5k + ₹1k/mo</td><td><span class="e">₹15k + ₹3k/mo</span></td></tr>
-      <tr><td><b>Website (no-code)</b></td><td>₹5–8k</td><td><span class="e">₹20k+</span></td></tr>
-      <tr><td><b>Ad creatives pack</b></td><td>₹3k</td><td><span class="e">₹6–10k</span></td></tr>
-    </table>
-    <p class="note">Rule: charge for the <b>outcome</b>, not the hours. AI makes you fast — don't price like it's slow work.</p>
-
-    <details class="acc" style="margin-top:16px">
-      <summary>📄 Proposal template (copy this)</summary>
-      <div class="body">
-        <div class="script"><span class="v">[Your Name / Brand]</span> — Proposal for <span class="v">[Client]</span>
-
-1. What you need: <span class="v">[their problem in 1 line]</span>
-2. What I'll deliver: <span class="v">[clear deliverables + quantity]</span>
-3. Timeline: <span class="v">[start → delivery]</span>
-4. Investment: <span class="v">[₹ price]</span> (50% advance, 50% on delivery)
-5. Why me: <span class="v">[1–2 samples / results]</span>
-
-Ready to start? Reply "yes" and I'll send the payment link.</div>
+    <!-- ===== TEMPLATES ===== -->
+    <section class="panel" id="templates">
+      <h1>🎨 Templates <span class="g">Vault</span></h1>
+      <p class="lead">Download, then edit in Word, Excel, Google Docs/Sheets, Pages or Numbers. No special software needed.</p>
+      <div class="dlgrid" style="margin-top:16px">
+        <div class="dl"><div class="ic">🗂️</div><h3>Portfolio Template</h3><p>One-page portfolio to send clients.</p><div class="dlbtns"><a class="dlbtn primary" href="https://docs.google.com/document/d/1Np3sgEROOVXGnENceCc54h60e-iT-z6gxTitjRJNdWM/copy" target="_blank" rel="noopener">✏️ Edit in Google</a><a class="dlbtn alt" href="kit-resources/01-Portfolio-Template.docx" download>Word</a><a class="dlbtn alt" href="kit-resources/01-Portfolio-Template.md" download>Notion</a></div></div>
+        <div class="dl"><div class="ic">📋</div><h3>Service Menu</h3><p>Your offers + prices, one clean page.</p><div class="dlbtns"><a class="dlbtn primary" href="https://docs.google.com/document/d/1ynKQGsgucqDR5w0bNefsoX_MVqMuWHIthe1c6yNf4jI/copy" target="_blank" rel="noopener">✏️ Edit in Google</a><a class="dlbtn alt" href="kit-resources/02-Service-Menu.docx" download>Word</a><a class="dlbtn alt" href="kit-resources/02-Service-Menu.md" download>Notion</a></div></div>
+        <div class="dl"><div class="ic">📝</div><h3>Proposal Template</h3><p>A proposal that closes deals.</p><div class="dlbtns"><a class="dlbtn primary" href="https://docs.google.com/document/d/18208iHGN63m6zTHExn1zRm389tiMy1mJ86V4heVUJok/copy" target="_blank" rel="noopener">✏️ Edit in Google</a><a class="dlbtn alt" href="kit-resources/05-Proposal-Template.docx" download>Word</a><a class="dlbtn alt" href="kit-resources/05-Proposal-Template.md" download>Notion</a></div></div>
+        <div class="dl"><div class="ic">🧾</div><h3>Invoice (auto-calc)</h3><p>GST-ready invoice — totals calculate themselves.</p><div class="dlbtns"><a class="dlbtn primary" href="https://docs.google.com/spreadsheets/d/1KAR3geEIMJ4eu9RiGTZL4Vow3CRZ9TCdM9O2a_l545k/copy" target="_blank" rel="noopener">✏️ Edit in Google</a><a class="dlbtn alt" href="kit-resources/Invoice-Template.xlsx" download>Excel</a></div></div>
+        <div class="dl"><div class="ic">📅</div><h3>30-Day Content Planner</h3><p>Calendar for your social-media clients.</p><div class="dlbtns"><a class="dlbtn primary" href="https://docs.google.com/spreadsheets/d/1bPXSiglTSlIbzubdSiuAXkD0m_tfh1sgnalrv5BA2-Y/copy" target="_blank" rel="noopener">✏️ Edit in Google</a><a class="dlbtn alt" href="kit-resources/Content-Planner.xlsx" download>Excel</a><a class="dlbtn alt" href="kit-resources/Content-Planner-Notion.csv" download>Notion</a></div></div>
       </div>
-    </details>
-  </section>
+      <div class="box blue" style="margin-top:16px"><b>✏️ Easiest way: "Edit in Google"</b><p style="color:var(--mut);margin-top:6px;font-size:14px">Tap <b>Edit in Google</b> on any template — it instantly creates your own editable copy in Google Docs/Sheets (free, works on phone & desktop, nothing to install). Prefer offline? Use the <b>Word</b>/<b>Excel</b> downloads, or <b>Notion</b> for importing.</p></div>
+    </section>
 
-  <div class="divider"></div>
+    <!-- ===== PLAN ===== -->
+    <section class="panel" id="plan">
+      <h1>✅ Your <span class="g">30-Day</span> Launch Plan</h1>
+      <p class="lead">Tick one thing at a time. Don't skip ahead.</p>
+      <div class="wk">Week 1 — Set up</div>
+      <ul class="check"><li>Day 1: Pick ONE idea. Write why it fits you.</li><li>Day 2: Read its funnel + deep-dive in the Blueprint.</li><li>Day 3–4: Learn the core AI tool.</li><li>Day 5–6: Make 3 free samples (your portfolio).</li><li>Day 7: Build portfolio + service menu (Templates tab).</li></ul>
+      <div class="wk">Week 2 — Reach out</div>
+      <ul class="check"><li>Day 8: List 30 potential clients.</li><li>Day 9–13: Send 10 messages/day (Scripts tab).</li><li>Day 14: Reply to everyone; send free samples.</li></ul>
+      <div class="wk">Week 3 — Close</div>
+      <ul class="check"><li>Day 15–17: Follow up with non-repliers.</li><li>Day 18–19: Send proposals to interested leads.</li><li>Day 20: Close your first client (50% advance). 🎉</li><li>Day 21: Start the work.</li></ul>
+      <div class="wk">Week 4 — Deliver & grow</div>
+      <ul class="check"><li>Day 22–25: Deliver excellent work.</li><li>Day 26: Collect final payment; send invoice.</li><li>Day 27: Ask for review + 2 referrals.</li><li>Day 28: Update portfolio.</li><li>Day 29: Raise your price.</li><li>Day 30: Send 10 new messages. Repeat.</li></ul>
+      <div class="box warn" style="margin-top:14px"><b>🎯 The only 3 rules</b><p style="color:var(--mut);margin-top:6px;font-size:14px">1. Consistency &gt; intensity. 2. Done &gt; perfect. 3. Every client → a review + 2 referrals.</p></div>
+    </section>
 
-  <!-- 5. PROMPTS -->
-  <section class="reveal" id="prompts">
-    <span class="eyebrow">Module 3</span>
-    <h2>🧠 Prompt <span class="g">Library</span> (samples)</h2>
-    <p class="lead">Plug-and-play prompts. The full Kit has these organised by all 50 ideas.</p>
+    <!-- ===== CASES ===== -->
+    <section class="panel" id="cases">
+      <h1>📈 Case <span class="g">Studies</span></h1>
+      <p class="lead">Realistic journeys (illustrative composites, not income guarantees).</p>
+      <div class="case"><div class="ct">College student → ₹18k/month</div><div class="meta">Resume + LinkedIn · ~10 hrs/week</div><ol><li>Made 3 sample resumes, posted a "free teardown" reel.</li><li>Messaged 25 students; 6 replied, 3 paid.</li><li>Week 4: 8 clients via referrals at ₹499 avg.</li><li>Month 3: combos + premium = ~₹18k/mo.</li></ol><div class="res">Key lever: <b>asking every client for a referral</b> — 70% of growth.</div></div>
+      <div class="case"><div class="ct">Working professional → ₹30k side income</div><div class="meta">AI Social Media Manager · weekends + evenings</div><ol><li>Audited a café's page free; landed at ₹8k/mo.</li><li>Batched a month of content in one weekend.</li><li>Used the result to pitch 2 more brands.</li><li>Month 2: 3 retainers = ₹30k with day job.</li></ol><div class="res">Key lever: <b>recurring retainers</b> beat one-off gigs.</div></div>
+      <div class="case"><div class="ct">Homemaker → ₹12k passive (growing)</div><div class="meta">Digital products (Canva packs) · flexible</div><ol><li>Designed 25 Instagram templates for cafés.</li><li>Listed on Gumroad ₹499; 3 demo reels/day.</li><li>First sale day 11. Steady after.</li><li>Month 4: ~₹12k/mo + 2nd pack.</li></ol><div class="res">Key lever: <b>consistency through the quiet weeks.</b></div></div>
+    </section>
 
-    <details class="acc">
-      <summary>✍️ Instagram captions for a client</summary>
-      <div class="body"><div class="script">Act as a social media copywriter. Write 10 Instagram captions for <span class="v">[business type]</span> targeting <span class="v">[audience]</span>. Tone: <span class="v">[friendly/premium]</span>. Each: a scroll-stopping first line, value, and a CTA. Add 5 relevant hashtags per caption.</div></div>
-    </details>
-    <details class="acc">
-      <summary>📄 Resume rewrite</summary>
-      <div class="body"><div class="script">You are an expert resume writer. Rewrite the resume below for a <span class="v">[role]</span> role. Use strong action verbs, quantify achievements, and optimise for ATS keywords for <span class="v">[industry]</span>. Keep it 1 page. Resume: <span class="v">[paste]</span></div></div>
-    </details>
-    <details class="acc">
-      <summary>🛍️ Product description (e-commerce)</summary>
-      <div class="body"><div class="script">Write a high-converting product description for <span class="v">[product]</span>. Include: a benefit-driven headline, 4 bullet features→benefits, an emotional short paragraph, and SEO keywords: <span class="v">[keywords]</span>. Tone: <span class="v">[brand voice]</span>.</div></div>
-    </details>
-    <details class="acc">
-      <summary>🤖 Chatbot FAQ flow</summary>
-      <div class="body"><div class="script">Create a customer-support chatbot script for a <span class="v">[business]</span>. List the top 15 FAQs with concise answers, a greeting, a lead-capture question (name + phone), and a fallback message to connect to a human.</div></div>
-    </details>
-    <p class="note">+ prompt sets for ads, scripts, SEO, proposals, automation and more in the full vault.</p>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 6. TEMPLATES VAULT -->
-  <section class="reveal" id="templates">
-    <span class="eyebrow">Module 4</span>
-    <h2>🎨 Templates <span class="g">Vault</span></h2>
-    <p class="lead">Ready-made files — duplicate and make them yours.</p>
-    <div class="modgrid">
-      <div class="mod"><div class="mi">🗂️</div><h3>Portfolio Template</h3><p>One-page portfolio. Editable Word + Notion-import Markdown.</p><a href="kit-resources/01-Portfolio-Template.docx">Word →</a> · <a href="kit-resources/01-Portfolio-Template.md">Notion (.md) →</a></div>
-      <div class="mod"><div class="mi">📋</div><h3>Service Menu</h3><p>"What I offer + prices" one-pager. Editable.</p><a href="kit-resources/02-Service-Menu.docx">Word →</a> · <a href="kit-resources/02-Service-Menu.md">Notion (.md) →</a></div>
-      <div class="mod"><div class="mi">🧾</div><h3>Invoice Template</h3><p>Auto-calculating invoice (GST-ready) with UPI/bank fields.</p><a href="kit-resources/Invoice-Template.xlsx">Excel →</a></div>
-      <div class="mod"><div class="mi">📅</div><h3>Content Planner</h3><p>30-day content calendar for your SMM clients.</p><a href="kit-resources/Content-Planner.xlsx">Excel →</a> · <a href="kit-resources/Content-Planner-Notion.csv">Notion (.csv) →</a></div>
-      <div class="mod"><div class="mi">📝</div><h3>Proposal Template</h3><p>A proposal that closes. Editable Word + Markdown.</p><a href="kit-resources/05-Proposal-Template.docx">Word →</a> · <a href="kit-resources/05-Proposal-Template.md">Notion (.md) →</a></div>
-      <div class="mod"><div class="mi">📚</div><h3>Full Resource Pack</h3><p>Scripts, prompts, pricing guide, launch plan & more.</p><a href="kit-resources/README.md">Open the pack →</a></div>
-    </div>
-    <p class="note">Word files open in Word/Google Docs/Pages. Excel files open in Excel/Sheets/Numbers. For Notion: Import → Markdown &amp; CSV → select the .md/.csv file → edit freely.</p>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 7. CASE STUDIES -->
-  <section class="reveal" id="cases">
-    <span class="eyebrow">Module 5</span>
-    <h2>📈 3 <span class="g">Case Studies</span> to copy</h2>
-    <p class="lead">Realistic, honest journeys — including the slow parts. (Illustrative composites, not income guarantees.)</p>
-
-    <div class="case">
-      <div class="ct">Case 1 — College student → ₹18k/month</div>
-      <div class="meta">Idea: Resume + LinkedIn service · Time: ~10 hrs/week</div>
-      <ol>
-        <li>Made 3 sample resumes, posted a "free teardown" reel.</li>
-        <li>Messaged 25 final-year students; 6 replied, 3 paid.</li>
-        <li>Week 4: 8 clients via referrals at ₹499 avg.</li>
-        <li>Month 3: ₹699 combo + ₹999 premium = ~₹18k/mo.</li>
-      </ol>
-      <div class="res">Key lever: <b>asking every client for a referral.</b> 70% of growth came from word-of-mouth.</div>
-    </div>
-
-    <div class="case">
-      <div class="ct">Case 2 — Working professional → ₹30k side income</div>
-      <div class="meta">Idea: AI Social Media Manager · Time: weekends + evenings</div>
-      <ol>
-        <li>Audited a local café's page free; landed them at ₹8k/mo.</li>
-        <li>Batched a month of content in one weekend with AI + Canva.</li>
-        <li>Used that result to pitch 2 more local brands.</li>
-        <li>Month 2: 3 retainers = ₹30k while keeping the day job.</li>
-      </ol>
-      <div class="res">Key lever: <b>recurring retainers</b> beat one-off gigs for stable income.</div>
-    </div>
-
-    <div class="case">
-      <div class="ct">Case 3 — Homemaker → ₹12k passive (growing)</div>
-      <div class="meta">Idea: Digital products (Canva packs) · Time: flexible</div>
-      <ol>
-        <li>Designed 25 Instagram templates for cafés.</li>
-        <li>Listed on Gumroad at ₹499; posted 3 demo reels/day.</li>
-        <li>First sale day 11. Slow but steady after.</li>
-        <li>Month 4: ~₹12k/mo passive + a 2nd pack launched.</li>
-      </ol>
-      <div class="res">Key lever: <b>consistency through the quiet weeks.</b> Most quit before sale #1.</div>
-    </div>
-    <p class="note">These illustrate realistic paths & effort. Your results depend on your consistency — no guarantees, ever.</p>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- 8. 30-DAY PLAN -->
-  <section class="reveal" id="plan">
-    <span class="eyebrow">Module 6</span>
-    <h2>✅ Your <span class="g">30-Day</span> Launch Plan</h2>
-    <p class="lead">Tick one thing off at a time. Don't skip ahead.</p>
-    <div class="check">
-      <ul style="margin:0;padding:0">
-        <li><b>Day 1–2:</b> Pick ONE idea. Read its funnel in the Blueprint.</li>
-        <li><b>Day 3–5:</b> Learn the core tool. Make 3 free samples.</li>
-        <li><b>Day 6–7:</b> Build your portfolio + service menu (templates above).</li>
-        <li><b>Day 8–14:</b> Send 10 outreach messages/day using the scripts.</li>
-        <li><b>Day 15–20:</b> Follow up. Send proposals. Close your first client.</li>
-        <li><b>Day 21–25:</b> Over-deliver. Ask for a review + 2 referrals.</li>
-        <li><b>Day 26–30:</b> Raise your price. Land client #2 & #3.</li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- SUPPORT -->
-  <section class="reveal">
-    <div class="support">
-      <div class="avatar">⚡</div>
-      <div>
-        <div style="font-weight:700">Stuck? We've got you.</div>
-        <div style="font-size:13px;color:var(--mut)">Email us anytime during your launch — we reply fast. <a href="mailto:support@optimityfx.com" style="color:var(--acc)">support@optimityfx.com →</a></div>
+    <!-- ===== SUPPORT ===== -->
+    <section class="panel" id="support">
+      <h1>💡 <span class="g">Support</span></h1>
+      <p class="lead">We want you to win. Reach out anytime.</p>
+      <div class="box" style="margin-top:16px">
+        <b style="font-size:16px">📧 Email us</b>
+        <p style="color:var(--mut);margin-top:6px;font-size:14px">Stuck on anything during your launch? Email <a class="inline" href="mailto:support@optimityfx.com">support@optimityfx.com</a> — we reply fast.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <div class="callbox">
-      <div class="inner">
-        <div class="ic">🤝</div>
-        <h2>Want us to set it up <span class="g">for you?</span></h2>
-        <p>If you'd like our team to help build and launch your online business, we'd be glad to help. Write to us anytime.</p>
-        <a class="btn" href="mailto:support@optimityfx.com">📧 Email support@optimityfx.com</a>
+      <div class="box" style="margin-top:14px">
+        <b style="font-size:16px">🤝 Want us to set it up for you?</b>
+        <p style="color:var(--mut);margin-top:6px;font-size:14px">If you'd like our team to help build and launch your online business, we'd be glad to help. Write to us at <a class="inline" href="mailto:support@optimityfx.com">support@optimityfx.com</a>.</p>
       </div>
-    </div>
-  </section>
-
-  <footer>
-    <div style="max-width:560px;margin:0 auto 16px;font-size:11.5px;line-height:1.7;color:var(--dim);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left">
-      <b style="color:var(--mut)">Disclaimer:</b> This Kit provides strategies, tools, templates, and guidance to help you build an online income. Your results depend entirely on your own strategy, effort, and execution. This product does not promise or guarantee any specific income or earnings. Please make your decisions accordingly.
-    </div>
-    © 2026 NextGen AI Lab · Powered by OptimityFX · support@optimityfx.com
-  </footer>
+      <div class="box blue" style="margin-top:14px">
+        <b>🔁 Keep growing</b>
+        <p style="color:var(--mut);margin-top:6px;font-size:14px">Re-read the Blueprint's 50 ideas as you scale. When one service is working, add a second from a related category, then consider building a small agency (idea #50).</p>
+      </div>
+      <div style="font-size:11.5px;line-height:1.7;color:var(--dim);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:18px">
+        <b style="color:var(--mut)">Disclaimer:</b> This Kit provides strategies, tools, templates, and guidance to help you build an online income. Your results depend entirely on your own strategy, effort, and execution. This product does not promise or guarantee any specific income or earnings. Please make your decisions accordingly.
+      </div>
+      <p style="color:var(--dim);font-size:12px;margin-top:16px">© 2026 NextGen AI Lab · Powered by OptimityFX</p>
+    </section>
+  </main>
 </div>
 
-<div class="sticky">
-  <a href="#scripts">🚀 Start with the scripts →</a>
+<!-- MOBILE NAV -->
+<div class="mnav" id="mnav">
+  <a data-tab="start" class="active"><span class="e">🎯</span>Start</a>
+  <a data-tab="scripts"><span class="e">💬</span>Scripts</a>
+  <a data-tab="prompts"><span class="e">🧠</span>Prompts</a>
+  <a data-tab="pricing"><span class="e">💰</span>Pricing</a>
+  <a data-tab="calc"><span class="e">🧮</span>Calc</a>
+  <a data-tab="templates"><span class="e">🎨</span>Files</a>
+  <a data-tab="plan"><span class="e">✅</span>Plan</a>
+  <a data-tab="cases"><span class="e">📈</span>Cases</a>
+  <a data-tab="support"><span class="e">💡</span>Help</a>
 </div>
+
+<div class="toast" id="toast">✓ Copied!</div>
 
 <script>
-  const io2=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target);}})},{threshold:.1});
-  document.querySelectorAll('.reveal').forEach(r=>io2.observe(r));
+  // ---- tab navigation ----
+  function showTab(id){
+    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('show',p.id===id));
+    document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('active',a.dataset.tab===id));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.querySelectorAll('[data-tab]').forEach(a=>{
+    a.addEventListener('click',e=>{e.preventDefault();showTab(a.dataset.tab);});
+  });
+
+  // ---- accordion open/close on header tap (but not when hitting copy btn) ----
+  document.querySelectorAll('.cc .h').forEach(h=>{
+    const body=h.nextElementSibling;
+    body.style.maxHeight='0';body.style.overflow='hidden';body.style.transition='max-height .3s';body.style.padding='0 16px';
+    h.addEventListener('click',e=>{
+      if(e.target.closest('.copybtn'))return;
+      const open=body.style.maxHeight!=='0px'&&body.style.maxHeight!=='0';
+      if(open){body.style.maxHeight='0';body.style.paddingTop='0';body.style.paddingBottom='0';}
+      else{body.style.padding='0 16px 16px';body.style.maxHeight=body.scrollHeight+40+'px';}
+    });
+  });
+
+  // ---- one-click copy with fallback ----
+  const toast=document.getElementById('toast');
+  function showToast(){toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400);}
+  function copyText(text){
+    if(navigator.clipboard&&window.isSecureContext){
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((res,rej)=>{
+      const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');res();}catch(e){rej(e);}finally{document.body.removeChild(ta);}
+    });
+  }
+  document.querySelectorAll('.copybtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const txt=btn.closest('.cc').querySelector('.txt').innerText;
+      copyText(txt).then(()=>{
+        btn.classList.add('done');btn.textContent='✓ Copied';showToast();
+        setTimeout(()=>{btn.classList.remove('done');btn.textContent='⧉ Copy';},1500);
+      }).catch(()=>{btn.textContent='Press Ctrl+C';});
+    });
+  });
+
+  // reading-progress HUD
   (function(){var h=document.getElementById('hud');function u(){var s=document.documentElement;var d=s.scrollHeight-s.clientHeight;h.style.width=(d>0?s.scrollTop/d*100:0)+'%';}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();
+
+  // ===== FULL income calculator =====
+  (function(){
+    function inr(n){n=Math.round(n);var neg=n<0;n=Math.abs(n);var s=n.toString(),l=s.length;if(l>3){var last3=s.slice(-3),rest=s.slice(0,l-3);s=rest.replace(/\B(?=(\d{2})+(?!\d))/g,",")+","+last3;}return (neg?"-₹":"₹")+s;}
+    var streamsEl=document.getElementById('streams');
+    var presets=[["AI Social Media Manager",3,10000],["",1,5000]];
+
+    function rowHTML(name,cl,pr){
+      return '<div class="stream"><input class="sName" placeholder="e.g. Resume writing" value="'+name.replace(/"/g,'&quot;')+'">'+
+        '<input class="sCl" type="number" min="0" value="'+cl+'">'+
+        '<input class="sPr" type="number" min="0" value="'+pr+'">'+
+        '<button class="rm" title="remove">×</button></div>';
+    }
+    function addRow(name,cl,pr){
+      var d=document.createElement('div');d.innerHTML=rowHTML(name||"",cl==null?1:cl,pr==null?5000:pr);
+      var node=d.firstChild;streamsEl.appendChild(node);
+      node.querySelectorAll('input').forEach(function(i){i.addEventListener('input',recalc);});
+      node.querySelector('.rm').addEventListener('click',function(){node.remove();recalc();});
+    }
+    function getStreams(){
+      var arr=[];streamsEl.querySelectorAll('.stream').forEach(function(s){
+        arr.push({n:s.querySelector('.sName').value,c:+s.querySelector('.sCl').value||0,p:+s.querySelector('.sPr').value||0});
+      });return arr;
+    }
+    var lastSummary="";
+    function recalc(){
+      var st=getStreams(), rev=0;
+      st.forEach(function(s){rev+=s.c*s.p;});
+      var exp=+document.getElementById('expenses').value||0;
+      var g=+document.getElementById('growth').value||0;
+      document.getElementById('growthVal').textContent=g+'%';
+      var net=rev-exp;
+      // 12-month projection (net grows by g% monthly)
+      var months=[],ytotal=0,cur=net;
+      for(var m=0;m<12;m++){months.push(cur);ytotal+=cur;cur=cur*(1+g/100);}
+      document.getElementById('sRev').textContent=inr(rev);
+      document.getElementById('sNet').textContent=inr(net);
+      document.getElementById('sYear').textContent=inr(ytotal);
+      drawGraph(months);
+      lastSummary="NextGen AI Lab — My Income Plan\n\nStreams:\n"+st.map(function(s){return "• "+(s.n||"(unnamed)")+": "+s.c+" × "+inr(s.p)+" = "+inr(s.c*s.p);}).join("\n")+
+        "\n\nMonthly revenue: "+inr(rev)+"\nMonthly expenses: "+inr(exp)+"\nMonthly net profit: "+inr(net)+
+        "\nGrowth assumption: "+g+"%/mo\nProjected Year-1 total: "+inr(ytotal)+
+        "\n\n(Illustrative estimate only — not an income guarantee.)";
+    }
+    function drawGraph(vals){
+      var svg=document.getElementById('projGraph'),W=600,H=240,pad=34;
+      var max=Math.max.apply(null,vals.concat([1])), min=Math.min.apply(null,vals.concat([0]));
+      if(min>0)min=0;var range=(max-min)||1;
+      var n=vals.length, step=(W-pad*2)/(n-1);
+      function x(i){return pad+i*step;} function y(v){return H-pad-((v-min)/range)*(H-pad*1.4);}
+      var pts=vals.map(function(v,i){return x(i)+","+y(v);});
+      var line=pts.join(" ");
+      var area="M"+x(0)+","+(H-pad)+" L"+pts.join(" L")+" L"+x(n-1)+","+(H-pad)+" Z";
+      var dots=vals.map(function(v,i){return '<circle cx="'+x(i)+'" cy="'+y(v).toFixed(1)+'" r="3.5" fill="#00D4FF"/>';}).join("");
+      var labels='';for(var i=0;i<n;i+=(n>6?2:1)){labels+='<text x="'+x(i)+'" y="'+(H-10)+'" fill="#5E6776" font-size="10" text-anchor="middle">M'+(i+1)+'</text>';}
+      svg.innerHTML='<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00D4FF" stop-opacity="0.35"/><stop offset="1" stop-color="#00D4FF" stop-opacity="0"/></linearGradient><linearGradient id="lg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00D4FF"/><stop offset="1" stop-color="#1E90FF"/></linearGradient></defs>'+
+        '<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-pad)+'" y2="'+(H-pad)+'" stroke="#1E2430"/>'+
+        '<path d="'+area+'" fill="url(#ag)"/>'+
+        '<polyline points="'+line+'" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linejoin="round"/>'+
+        dots+labels;
+    }
+    // mode toggle
+    document.querySelectorAll('.seg button').forEach(function(b){
+      b.addEventListener('click',function(){
+        document.querySelectorAll('.seg button').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        var goal=b.dataset.mode==='goal';
+        document.getElementById('planView').style.display=goal?'none':'grid';
+        document.getElementById('goalView').style.display=goal?'grid':'none';
+        if(goal)goalCalc();
+      });
+    });
+    // goal mode
+    function goalCalc(){
+      var t=+document.getElementById('gTarget').value||0,p=+document.getElementById('gPrice').value||1,d=+document.getElementById('gDays').value||22;
+      var clients=Math.ceil(t/p);
+      var perDay=(clients/d);
+      document.getElementById('goalOut').innerHTML=
+        "To earn <b>"+inr(t)+"/month</b> at <b>"+inr(p)+"</b> per client, you need:<br><br>"+
+        "👉 <b>"+clients+" clients per month</b><br>"+
+        "👉 about <b>"+(perDay<1?perDay.toFixed(1):Math.ceil(perDay))+" client"+(clients===1?"":"s")+" per working day</b> ("+d+" days)<br>"+
+        "👉 roughly <b>"+Math.ceil(clients/4)+" new clients per week</b><br><br>"+
+        "<span style='color:var(--mut);font-size:13px'>Tip: raise your price per client to hit the goal with fewer clients.</span>";
+    }
+    ['gTarget','gPrice','gDays'].forEach(function(id){document.getElementById(id).addEventListener('input',goalCalc);});
+    // controls
+    document.getElementById('addStream').addEventListener('click',function(){addRow("",1,5000);recalc();});
+    document.getElementById('expenses').addEventListener('input',recalc);
+    document.getElementById('growth').addEventListener('input',recalc);
+    // save / export
+    document.getElementById('saveBtn').addEventListener('click',function(){
+      try{localStorage.setItem('nglab_plan',JSON.stringify({s:getStreams(),e:document.getElementById('expenses').value,g:document.getElementById('growth').value}));
+        this.textContent='✓ Saved!';var b=this;setTimeout(function(){b.textContent='💾 Save my plan';},1500);
+      }catch(e){this.textContent='Save unavailable';}
+    });
+    document.getElementById('expBtn').addEventListener('click',function(){
+      var blob=new Blob([lastSummary],{type:'text/plain'});var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);a.download='My-Income-Plan.txt';a.click();
+    });
+    // init (restore saved or presets)
+    var saved=null;try{saved=JSON.parse(localStorage.getItem('nglab_plan'));}catch(e){}
+    if(saved&&saved.s&&saved.s.length){saved.s.forEach(function(s){addRow(s.n,s.c,s.p);});document.getElementById('expenses').value=saved.e;document.getElementById('growth').value=saved.g;}
+    else{presets.forEach(function(p){addRow(p[0],p[1],p[2]);});}
+    recalc();
+  })();
 </script>
-<script>(function(){function s(){document.querySelectorAll(".reveal").forEach(function(r){r.classList.add("in");});}if(!("IntersectionObserver" in window)){s();return;}window.addEventListener("load",function(){setTimeout(s,1500);});})();</script></body>
+</body>
 </html>
