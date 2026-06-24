@@ -136,7 +136,7 @@
 <div class="wrap">
 
   <div class="brand">
-    <a href="https://optimityfx.com" style="display:flex;align-items:center"><img src="logo-nav.webp" alt="OptimityFX" class="brand-img"></a>
+    <a href="https://optimityfx.com" style="display:flex;align-items:center"><img src="logo-nav.webp" alt="OptimityFX" class="brand-img"></a><div style="font-weight:800;font-size:15px;line-height:1.1;margin-left:10px">NextGen AI Lab<small style="display:block;font-weight:500;color:var(--mut);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px">Powered by OptimityFX</small></div>
     
   </div>
 
@@ -484,8 +484,7 @@
       </div>
     </div>
   </section>
-."
-"  <!-- ===== BLUEPRINT PREVIEW STRIP (placeholder) ===== -->
+  <!-- ===== BLUEPRINT PREVIEW STRIP (placeholder) ===== -->
   <section class="reveal" style="margin:34px 0">
     <div class="tb-lbl">A peek inside</div>
     <h2>What's in the <span class="g" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">₹199 Blueprint</span></h2>
@@ -639,6 +638,95 @@
   var seen=new WeakSet();
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!seen.has(e.target)){seen.add(e.target);anim(e.target);}});},{threshold:.6});
   document.querySelectorAll('.tb-stat .n').forEach(function(n){io.observe(n);});
+})();
+</script>
+<!-- ===== ENHANCE2: top tools, amount+tool highlight, idea collapse, inline HUDs, kit particles ===== -->
+<style>
+  .topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 4px;padding:12px 14px;background:rgba(16,20,27,.6);border:1px solid var(--line);border-radius:14px}
+  .topbar .tl{font-family:'Courier New',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);white-space:nowrap}
+  .topbar .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .topbar .tchip{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--mut)}
+  .topbar .lg{width:15px;height:15px;flex-shrink:0;background:#C7D0DE;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+  .tag.earn{background:rgba(0,212,255,.10)!important;border:1px solid rgba(0,212,255,.45)!important}
+  .tag.earn b{color:#00D4FF!important;font-weight:800}
+  .toolicon{display:inline-block;width:13px;height:13px;vertical-align:-2px;margin-right:3px;background:#C7D0DE;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+  .hudstrip{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;margin:16px 0;padding:13px 16px;border:1px solid rgba(0,212,255,.3);border-radius:14px;background:linear-gradient(160deg,#0d1722,#0b0e13)}
+  .hudstrip .hi{font-size:20px;animation:hsfloat 2.4s ease-in-out infinite}
+  .hudstrip .ht{font-size:13.5px;font-weight:600;color:var(--txt)}
+  .hudstrip::after{content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(0,212,255,.12),transparent);transform:skewX(-18deg);animation:hsshine 5s ease-in-out infinite}
+  @keyframes hsfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  @keyframes hsshine{0%{left:-130%}55%,100%{left:170%}}
+  #pfx{position:fixed;inset:0;z-index:-1;pointer-events:none}
+  @media(max-width:560px){.topbar{padding:10px 12px}.topbar .tl{width:100%}}
+  @media(prefers-reduced-motion:reduce){.hudstrip .hi,.hudstrip::after{animation:none!important}}
+</style>
+<script>
+(function(){
+  var L={chatgpt:/chat\s*gpt|openai|gpt\b/i,claude:/claude/i,gemini:/gemini/i,canva:/canva/i,notion:/notion/i,elevenlabs:/eleven\s*labs|11labs/i,razorpay:/razorpay/i};
+  function iconFor(name){for(var k in L){if(L[k].test(name))return '<span class="toolicon" style="-webkit-mask-image:url(logos/'+k+'.svg);mask-image:url(logos/'+k+'.svg)"></span>';}return '';}
+
+  // --- top tools strip after header ---
+  var head=document.querySelector('.brand')||document.querySelector('.top');
+  if(head && !document.querySelector('.topbar')){
+    var tools=[['chatgpt','ChatGPT'],['claude','Claude'],['gemini','Gemini'],['canva','Canva'],['notion','Notion'],['elevenlabs','ElevenLabs'],['razorpay','Razorpay']];
+    var row=tools.map(function(t){return '<span class="tchip"><span class="lg" style="-webkit-mask-image:url(logos/'+t[0]+'.svg);mask-image:url(logos/'+t[0]+'.svg)"></span>'+t[1]+'</span>';}).join('');
+    var bar=document.createElement('div'); bar.className='topbar';
+    bar.innerHTML='<span class="tl">⚡ Built on tools the pros use</span><div class="row">'+row+'</div>';
+    head.parentNode.insertBefore(bar, head.nextSibling);
+  }
+
+  // --- add tool icons inside idea "Tools:" tags ---
+  document.querySelectorAll('.tag').forEach(function(tag){
+    if(/tools\s*:/i.test(tag.textContent) && !tag.querySelector('.toolicon')){
+      var b=tag.querySelector('b'); if(!b)return;
+      var parts=b.textContent.split(/,|\//).map(function(s){return s.trim();}).filter(Boolean);
+      b.innerHTML=parts.map(function(p){return iconFor(p)+p;}).join(', ');
+    }
+  });
+
+  // --- Blueprint: collapse the 50 ideas (one open at a time) ---
+  var ideas=document.querySelectorAll('.idea');
+  var hasFunnels=document.querySelectorAll('.idea .funnel').length;
+  if(hasFunnels>10){
+    var st=document.createElement('style');
+    st.textContent='.idea .desc,.idea .funnel{display:none}.idea.io-open .desc,.idea.io-open .funnel{display:block}.idea>.it{cursor:pointer;padding-right:24px;position:relative}.idea>.it::after{content:"\\2304";position:absolute;right:2px;top:-2px;color:var(--acc);font-weight:800;font-size:18px;transition:transform .25s}.idea.io-open>.it::after{transform:rotate(180deg)}.idea .meta{margin-top:8px}';
+    document.head.appendChild(st);
+    ideas.forEach(function(id){
+      var title=id.querySelector('.it'); if(!title)return;
+      title.addEventListener('click',function(){
+        var open=id.classList.contains('io-open');
+        document.querySelectorAll('.idea.io-open').forEach(function(o){o.classList.remove('io-open');});
+        if(!open)id.classList.add('io-open');
+      });
+    });
+  }
+
+  // --- inline HUD strips between segments ---
+  var strips=[['💰','Pick ONE idea and go deep — that’s where the real money is.'],['♾️','Everything here gets lifetime updates — free, forever.'],['⚡','The Kit turns these ideas into copy-paste scripts that get you paid.'],['🌴','Done right, one service becomes recurring, passive-ish income.']];
+  function strip(i){var d=document.createElement('div');d.className='hudstrip reveal in';d.innerHTML='<span class="hi">'+strips[i%strips.length][0]+'</span><span class="ht">'+strips[i%strips.length][1]+'</span>';return d;}
+  if(ideas.length){
+    var pts = ideas.length>10 ? [12,25,38] : [Math.floor(ideas.length/2)];
+    pts.forEach(function(p,idx){ if(ideas[p]) ideas[p].parentNode.insertBefore(strip(idx), ideas[p].nextSibling); });
+  }
+
+  // --- Kit: premium particles + cursor glow (subtle) ---
+  if(document.querySelector('.shell')){
+    var c=document.createElement('canvas'); c.id='pfx'; document.body.insertBefore(c,document.body.firstChild);
+    var x=c.getContext('2d'),W,H,parts=[],mx=-999,my=-999;
+    function rs(){W=c.width=innerWidth;H=c.height=innerHeight;}
+    rs(); addEventListener('resize',rs,{passive:true});
+    for(var i=0;i<16;i++)parts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.6,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});
+    addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;},{passive:true});
+    addEventListener('mouseleave',function(){mx=-999;my=-999;});
+    (function loop(){
+      x.clearRect(0,0,W,H);
+      if(mx>-900){var g=x.createRadialGradient(mx,my,0,mx,my,160);g.addColorStop(0,'rgba(0,212,255,.07)');g.addColorStop(1,'rgba(0,212,255,0)');x.fillStyle=g;x.fillRect(mx-160,my-160,320,320);}
+      parts.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+        var dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy),a=d<140?.5:.18;
+        x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fillStyle='rgba(0,212,255,'+a+')';x.fill();});
+      requestAnimationFrame(loop);
+    })();
+  }
 })();
 </script>
 </body>
