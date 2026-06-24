@@ -1199,7 +1199,7 @@
   .topbar .tchip{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--mut)}
   .topbar .lg{width:15px;height:15px;flex-shrink:0;background:#C7D0DE;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
   .tag.earn{background:rgba(0,212,255,.10)!important;border:1px solid rgba(0,212,255,.45)!important}
-  .tag.earn b{color:#00D4FF!important;font-weight:800}
+  .tag.earn b{color:#00D4FF!important;font-weight:800}.tag.earn{color:#00D4FF!important}
   .toolicon{display:inline-block;width:13px;height:13px;vertical-align:-2px;margin-right:3px;background:#C7D0DE;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
   .hudstrip{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;margin:16px 0;padding:13px 16px;border:1px solid rgba(0,212,255,.3);border-radius:14px;background:linear-gradient(160deg,#0d1722,#0b0e13)}
   .hudstrip .hi{font-size:20px;animation:hsfloat 2.4s ease-in-out infinite}
@@ -1229,9 +1229,7 @@
   // --- add tool icons inside idea "Tools:" tags ---
   document.querySelectorAll('.tag').forEach(function(tag){
     if(/tools\s*:/i.test(tag.textContent) && !tag.querySelector('.toolicon')){
-      var b=tag.querySelector('b'); if(!b)return;
-      var parts=b.textContent.split(/,|\//).map(function(s){return s.trim();}).filter(Boolean);
-      b.innerHTML=parts.map(function(p){return iconFor(p)+p;}).join(', ');
+      var m=tag.textContent.match(/tools\s*:?\s*(.+)/i); if(!m)return; var parts=m[1].split(/,|\//).map(function(s){return s.trim();}).filter(Boolean); tag.innerHTML="Tools: "+parts.map(function(p){return iconFor(p)+p;}).join(", ");
     }
   });
 
